@@ -1,3 +1,5 @@
+package DBSAssign;
+
 import java.util.*;
 import java.lang.*;
 
@@ -18,7 +20,7 @@ public class Ques2 extends javax.swing.JFrame {
     static int[] ldarray = new int[100];
     static String[] biarray = new String[100];
     static int[] sizearray = new int[100];
-    String output = "";
+    static String output = "";
     
     
     public static void add_key(int cur)
@@ -45,6 +47,26 @@ public class Ques2 extends javax.swing.JFrame {
 		    				buckets[j][sizearray[j]] = cur;
 		    				sizearray[j]++;
                                                  System.out.println("Added successfully "+cur+" at pos "+j+", "+sizearray[j]);
+                                                 output += ("Adding "+cur+"\n");
+                                                        for(int i=0; i<10; i++)
+                                                        {
+                                                            System.out.println("checking bucket "+i+" size of this bucket = "+sizearray[i]);
+                                                            if(sizearray[i] > 0)
+                                                            {
+                                                                System.out.print("Bucket number "+i+" = ");
+                                                                output += ("Bucket number "+i+" = |");
+                                                                for(int k=0; k<sizearray[i]; k++)
+                                                                {
+                                                                        System.out.print(buckets[i][k]+" ");
+                                                                        output += (buckets[i][k]+" |");
+                                                                }
+                                                                System.out.println("");
+                                                                output += "\n";
+
+                                                            }
+                                                        }
+                                                         output += "\n";
+                                                        //outputArea.setText(output);
 		    				break;
 						}
 						else
@@ -133,7 +155,6 @@ public class Ques2 extends javax.swing.JFrame {
         outputArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(726, 463));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setText("Extendible Hashing Simulator");
@@ -237,7 +258,10 @@ public class Ques2 extends javax.swing.JFrame {
         {
             System.out.println("Entering add keys for "+keys[i]);
             add_key(keys[i]);
+            outputArea.setText(output);
+            System.out.println("Called set text");
         }
+        /*
         for(int i=0; i<10; i++)
         {
             System.out.println("checking bucket "+i+" size of this bucket = "+sizearray[i]);
@@ -256,6 +280,7 @@ public class Ques2 extends javax.swing.JFrame {
             }
         }
         outputArea.setText(output);
+        */
     }//GEN-LAST:event_doneButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
