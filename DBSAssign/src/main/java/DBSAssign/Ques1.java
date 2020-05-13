@@ -422,6 +422,7 @@ public class Ques1 extends javax.swing.JFrame {
                                 int Ga=0;
                                 for(int i=0; i<ssss; i++)
                                 {
+				    Ga = 0;
                                     String temp = lhss.get(i);
                                     for(int ii=0;ii<temp.length();ii+=2)
                                     {
