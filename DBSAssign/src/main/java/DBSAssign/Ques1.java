@@ -267,17 +267,36 @@ public class Ques1 extends javax.swing.JFrame {
 
     private void decompose_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decompose_buttonActionPerformed
         // TODO add your handling code here:
+        if(lowestnormal == 4)
+        {
+             output_area.setText("Already in BCNF");
+             return;
+        }
         System.out.println("GG");
+        int test = lowestnormal;
+        Set<String> RBA = attribute_set;//(R-(B-A)) set
+        ArrayList<String> lef = lhs;
+        ArrayList<String> rig = rhs;
+        int tempfindi[] = maxnfindi;
+        while(test <= lowestnormal)
+        {
                 Set<String> AB = new HashSet<String>();//AUB set
-                Set<String> RBA = attribute_set;//(R-(B-A)) set
-                int rno = 0;
+                int rno = -1;
                 
-                for(int i = 0; i < lhs.size(); i++){
-                    if(maxnfindi[i] == lowestnormal){
-                        String temp = lhs.get(i);
+//                static ArrayList<String> lhs = new ArrayList();
+//                static ArrayList<String> rhs = new ArrayList();
+//                Set<String> keys = new HashSet<String>();
+//                static int maxnfindi[] = new int[20];
+
+
+                   
+                for(int i = 0; i < lef.size(); i++){
+                    if(tempfindi[i] == test){
+                        rno = i;
+                        String temp = lef.get(i);
                         String lhs_temp_split[] = temp.split(",");//Key
                         Collections.addAll(AB, lhs_temp_split);
-                        temp = rhs.get(i);
+                        temp = rig.get(i);
                         String rhs_temp_split[] = temp.split(","); 
                         
                         Set<String> A_B = new HashSet<String>();
@@ -285,12 +304,38 @@ public class Ques1 extends javax.swing.JFrame {
                         A_B.removeAll(AB);
                         RBA.removeAll(A_B);
                         Collections.addAll(AB, rhs_temp_split);
+                        System.out.println("IK");
                         System.out.println(A_B);
                         System.out.println(RBA);
+                        break;
                     }
                 }
-                System.out.println(AB);
-                System.out.println(RBA);
+                if(rno == -1)
+                {
+                    break;
+                }
+                ArrayList<String> templef = new ArrayList<String>();
+                ArrayList<String> temprig = new ArrayList<String>();
+                for(int i = 0 ; i < lef.size() ; i ++ )
+                {
+                    if(i != rno)
+                    {
+                        Set<String> temp = new HashSet<>();
+                        Collections.addAll(temp, lef.get(i));
+                        Collections.addAll(temp, rig.get(i));
+                        if(RBA.containsAll(temp))
+                        {
+                            templef.add(lef.get(i));
+                            temprig.add(rig.get(i));
+                        }
+                    }                    
+                }
+                lef = templef;
+                rig = temprig;
+                System.out.println("HI");
+                System.out.println(lef);
+                System.out.println(rig);
+        }       
     }//GEN-LAST:event_decompose_buttonActionPerformed
 
     /**
