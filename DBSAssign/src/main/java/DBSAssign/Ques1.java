@@ -70,6 +70,11 @@ public class Ques1 extends javax.swing.JFrame {
 
         decompose_button.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         decompose_button.setText("Decompose");
+        decompose_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decompose_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,6 +264,10 @@ public class Ques1 extends javax.swing.JFrame {
         output_area.setText(output);
         // TODO add your handling code here:
     }//GEN-LAST:event_solve_buttonActionPerformed
+
+    private void decompose_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decompose_buttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_decompose_buttonActionPerformed
 
     /**
      * @param args the command line arguments
