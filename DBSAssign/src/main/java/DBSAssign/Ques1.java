@@ -140,7 +140,10 @@ public class Ques1 extends javax.swing.JFrame {
         System.out.println(fds_1);
         if(fds_1.equals("") == true)
         {
-            output_area.setText("No FDs entered");
+            String out = "No FDs entered\n";
+            out += "Hence the key is-\n";
+            out += attributes;
+            output_area.setText(out);
             return ;
         }
         String fds_2[] = fds_1.split(";");
