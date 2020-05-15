@@ -18,6 +18,7 @@ public class Ques1 extends javax.swing.JFrame {
     static ArrayList<String> rhs = new ArrayList();
     Set<String> keys = new HashSet<String>();
     static int maxnfindi[] = new int[20];
+    static String output = "";
 
     /**
      * Creates new form Ques1
@@ -44,6 +45,7 @@ public class Ques1 extends javax.swing.JFrame {
         output_area = new javax.swing.JTextArea();
         solve_button = new javax.swing.JButton();
         decompose_button = new javax.swing.JButton();
+        clear_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +78,13 @@ public class Ques1 extends javax.swing.JFrame {
             }
         });
 
+        clear_button.setText("Clear");
+        clear_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,7 +99,10 @@ public class Ques1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(solve_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(decompose_button, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                            .addComponent(decompose_button, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(35, 35, 35)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -121,9 +133,11 @@ public class Ques1 extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addComponent(solve_button, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(solve_button, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(decompose_button, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(decompose_button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clear_button)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -144,7 +158,6 @@ public class Ques1 extends javax.swing.JFrame {
             lhs.add(fds_3[0]);
             rhs.add(fds_3[1]);
         }
-        String output = "";
         //output_area.setText(output);
         LinkedHashMap<String , Integer> ggma = new LinkedHashMap<String , Integer>();
 
@@ -268,6 +281,13 @@ public class Ques1 extends javax.swing.JFrame {
     private void decompose_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decompose_buttonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_decompose_buttonActionPerformed
+
+    private void clear_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_buttonActionPerformed
+        att_names.setText("");
+        fds.setText("");
+        output = "";
+        output_area.setText("");
+    }//GEN-LAST:event_clear_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -542,6 +562,7 @@ public class Ques1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel att_label;
     private javax.swing.JTextField att_names;
+    private javax.swing.JButton clear_button;
     private javax.swing.JButton decompose_button;
     private javax.swing.JLabel fd_label;
     private javax.swing.JTextField fds;
