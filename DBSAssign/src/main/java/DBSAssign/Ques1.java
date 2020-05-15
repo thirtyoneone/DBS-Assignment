@@ -18,7 +18,11 @@ public class Ques1 extends javax.swing.JFrame {
     static ArrayList<String> rhs = new ArrayList();
     Set<String> keys = new HashSet<String>();
     static int maxnfindi[] = new int[20];
+<<<<<<< HEAD
     static String output = "";
+=======
+    static int lowestnormal = 4;
+>>>>>>> bdc0965b682368abfecc1ce1f2b3d9bd839a1cb1
 
     /**
      * Creates new form Ques1
@@ -77,6 +81,7 @@ public class Ques1 extends javax.swing.JFrame {
                 decompose_buttonActionPerformed(evt);
             }
         });
+<<<<<<< HEAD
 
         clear_button.setText("Clear");
         clear_button.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +89,8 @@ public class Ques1 extends javax.swing.JFrame {
                 clear_buttonActionPerformed(evt);
             }
         });
+=======
+>>>>>>> bdc0965b682368abfecc1ce1f2b3d9bd839a1cb1
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,7 +244,6 @@ public class Ques1 extends javax.swing.JFrame {
         System.out.println(keys);
         output = output.replaceFirst(".$","");
         output += "\n\nThe FDs you entered and the corresponding Normal Forms are \n\n";
-        int te = 4;
         for(int i=0; i<size; i++)
         {
             output += fds_2[i];
@@ -258,17 +264,17 @@ public class Ques1 extends javax.swing.JFrame {
             {
                 output += "BCNF";
             }
-            if(maxnfindi[i] < te)
+            if(maxnfindi[i] < lowestnormal)
             {
-                te = maxnfindi[i];
+                lowestnormal = maxnfindi[i];
             }
             output += "\n";
         }
         
         output += "The relation is in ";
-        if(te <= 3)
+        if(lowestnormal <= 3)
         {
-            output += String.valueOf(te)+"NF";
+            output += String.valueOf(lowestnormal)+"NF";
         }
         else
         {
@@ -280,6 +286,7 @@ public class Ques1 extends javax.swing.JFrame {
 
     private void decompose_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decompose_buttonActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
     }//GEN-LAST:event_decompose_buttonActionPerformed
 
     private void clear_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_buttonActionPerformed
@@ -288,6 +295,78 @@ public class Ques1 extends javax.swing.JFrame {
         output = "";
         output_area.setText("");
     }//GEN-LAST:event_clear_buttonActionPerformed
+=======
+        if(lowestnormal == 4)
+        {
+             output_area.setText("Already in BCNF");
+             return;
+        }
+        System.out.println("GG");
+        int test = lowestnormal;
+        Set<String> RBA = attribute_set;//(R-(B-A)) set
+        ArrayList<String> lef = lhs;
+        ArrayList<String> rig = rhs;
+        int tempfindi[] = maxnfindi;
+        while(test <= lowestnormal)
+        {
+                Set<String> AB = new HashSet<String>();//AUB set
+                int rno = -1;
+                
+//                static ArrayList<String> lhs = new ArrayList();
+//                static ArrayList<String> rhs = new ArrayList();
+//                Set<String> keys = new HashSet<String>();
+//                static int maxnfindi[] = new int[20];
+
+
+                   
+                for(int i = 0; i < lef.size(); i++){
+                    if(tempfindi[i] == test){
+                        rno = i;
+                        String temp = lef.get(i);
+                        String lhs_temp_split[] = temp.split(",");//Key
+                        Collections.addAll(AB, lhs_temp_split);
+                        temp = rig.get(i);
+                        String rhs_temp_split[] = temp.split(","); 
+                        
+                        Set<String> A_B = new HashSet<String>();
+                        Collections.addAll(A_B, rhs_temp_split);
+                        A_B.removeAll(AB);
+                        RBA.removeAll(A_B);
+                        Collections.addAll(AB, rhs_temp_split);
+                        System.out.println("IK");
+                        System.out.println(A_B);
+                        System.out.println(RBA);
+                        break;
+                    }
+                }
+                if(rno == -1)
+                {
+                    break;
+                }
+                ArrayList<String> templef = new ArrayList<String>();
+                ArrayList<String> temprig = new ArrayList<String>();
+                for(int i = 0 ; i < lef.size() ; i ++ )
+                {
+                    if(i != rno)
+                    {
+                        Set<String> temp = new HashSet<>();
+                        Collections.addAll(temp, lef.get(i));
+                        Collections.addAll(temp, rig.get(i));
+                        if(RBA.containsAll(temp))
+                        {
+                            templef.add(lef.get(i));
+                            temprig.add(rig.get(i));
+                        }
+                    }                    
+                }
+                lef = templef;
+                rig = temprig;
+                System.out.println("HI");
+                System.out.println(lef);
+                System.out.println(rig);
+        }       
+    }//GEN-LAST:event_decompose_buttonActionPerformed
+>>>>>>> bdc0965b682368abfecc1ce1f2b3d9bd839a1cb1
 
     /**
      * @param args the command line arguments
@@ -338,10 +417,10 @@ public class Ques1 extends javax.swing.JFrame {
             }
             else
             {
-                System.out.println("2NF");
+//                System.out.println("2NF");
                 temparr[i] = 2;
-                System.out.println(key);
-                System.out.println(lhs_split);
+//                System.out.println(key);
+//                System.out.println(lhs_split);
                 //System.out.println(rhs_split);
             }
         }
@@ -381,8 +460,8 @@ public class Ques1 extends javax.swing.JFrame {
 
     public static void threenf(int temparr[], Set<String> key)
 	{
-            System.out.println("Key in 3nf");
-            System.out.println(key);
+//            System.out.println("Key in 3nf");
+//            System.out.println(key);
 //		int flag = 0;
 		for(int i=0; i<lhs.size(); i++)
 		{
@@ -406,13 +485,13 @@ public class Ques1 extends javax.swing.JFrame {
 			{
 			     if(temparr[i] == 2)
                              {
-                                System.out.println(lhs_split.containsAll(key));
-                                System.out.println(key.containsAll(rhs_split));
+//                                System.out.println(lhs_split.containsAll(key));
+//                                System.out.println(key.containsAll(rhs_split));
                                 temparr[i] = 3;
-                                System.out.println("3nf");
-                                System.out.println(key);
-                                System.out.println(lhs_split);
-                                System.out.println(rhs_split);
+//                                System.out.println("3nf");
+//                                System.out.println(key);
+//                                System.out.println(lhs_split);
+//                                System.out.println(rhs_split);
                              }
 
                         }
@@ -451,6 +530,7 @@ public class Ques1 extends javax.swing.JFrame {
                                 int Ga=0;
                                 for(int i=0; i<ssss; i++)
                                 {
+                                    Ga = 0;
                                     String temp = lhss.get(i);
                                     for(int ii=0;ii<temp.length();ii+=2)
                                     {
@@ -458,8 +538,20 @@ public class Ques1 extends javax.swing.JFrame {
                                         if(arr[xx]==0)
                                         {
                                             Ga=1;
+                                            if(j == 6 && i == 2)
+                                            {
+                                                System.out.println("HI");
+                                                System.out.println(xx);
+                                            }
                                             break;
                                         }
+                                    }
+                                    if(j == 6 && i == 2)
+                                    {
+                                        System.out.println(arr[1]);
+                                        System.out.println(arr[0]);
+                                        System.out.println('B');
+                                        System.out.println(Ga);
                                     }
                                     if(Ga==0)
                                     {
@@ -467,6 +559,8 @@ public class Ques1 extends javax.swing.JFrame {
                                         for(int iii=0;iii<ee.length();iii+=2)
                                         {
                                             int xx=ee.charAt(iii)-'0';
+                                            System.out.print("a ");
+                                            System.out.println(iii);
                                             if(arr[xx]==0)
                                             {
                                                 arr[xx]=1;
@@ -485,6 +579,14 @@ public class Ques1 extends javax.swing.JFrame {
                                     break;
                                 }
                             }
+                            if(j == 6)
+                            {
+                                for(int i=0;i<sizz;i++)
+                                {
+                                    System.out.print(i);
+                                    System.out.println(arr[i]);
+                                }                                           
+                            }
                             if(Ga==0)// && mm<maxx)
                             {
                                 System.out.println(j);
@@ -492,7 +594,7 @@ public class Ques1 extends javax.swing.JFrame {
     //                            aa=j;
             int kee = j;
             Set<String> checkkey = new HashSet<String>();
-            System.out.println(kee);
+//            System.out.println(kee);/
             int iiiii=0;
             while(kee!=0)
             {

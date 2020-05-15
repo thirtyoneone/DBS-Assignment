@@ -155,6 +155,7 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="decompose_buttonActionPerformed"/>
       </Events>
+<<<<<<< HEAD
     </Component>
     <Component class="javax.swing.JButton" name="clear_button">
       <Properties>
@@ -163,6 +164,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clear_buttonActionPerformed"/>
       </Events>
+=======
+>>>>>>> bdc0965b682368abfecc1ce1f2b3d9bd839a1cb1
     </Component>
   </SubComponents>
 </Form>
