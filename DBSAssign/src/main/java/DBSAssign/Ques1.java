@@ -5,6 +5,7 @@
  */
 package DBSAssign;
 
+import static java.lang.Integer.min;
 import java.util.*;
 
 /**
@@ -294,6 +295,8 @@ public class Ques1 extends javax.swing.JFrame {
              output_area.setText("Already in BCNF");
              return;
         }
+        String out = "";
+        int cur = 1;
         System.out.println("GG");
         int test = lowestnormal;
         Set<String> RBA = attribute_set;//(R-(B-A)) set
@@ -309,9 +312,7 @@ public class Ques1 extends javax.swing.JFrame {
 //                static ArrayList<String> rhs = new ArrayList();
 //                Set<String> keys = new HashSet<String>();
 //                static int maxnfindi[] = new int[20];
-
-
-                   
+                  
                 for(int i = 0; i < lef.size(); i++){
                     if(tempfindi[i] == test){
                         rno = i;
@@ -336,30 +337,381 @@ public class Ques1 extends javax.swing.JFrame {
                 {
                     break;
                 }
+                out += "Relation Number #";
+                out += Integer.toString(cur);
+                out += "\n";
+                cur ++;
+                out += "Attributes- ";
+                Set<String> att = new HashSet<String>();
+                Collections.addAll(att, lef.get(rno));
+                Collections.addAll(att, rig.get(rno));
+                out += att;
+                out += "\n";
+                out += "FDs - ";
+                out += "\n";
+                out += lef.get(rno);
+                out += "->";
+                out += rig.get(rno);
+                out += "\n";
+                out += "Key - ";
+                out += lef.get(rno);
+                out += "\n";
+                out += "The relation is in BCNF\n";
+                out += "\n\n";
                 ArrayList<String> templef = new ArrayList<String>();
                 ArrayList<String> temprig = new ArrayList<String>();
+                    System.out.println("FLAG");
+                    System.out.println(lef);
+                    System.out.println(RBA);
+                    
                 for(int i = 0 ; i < lef.size() ; i ++ )
                 {
                     if(i != rno)
                     {
-                        Set<String> temp = new HashSet<>();
-                        Collections.addAll(temp, lef.get(i));
-                        Collections.addAll(temp, rig.get(i));
+                        Set<String> temp = new HashSet<String>();
+			String tem = lef.get(i);
+			String lhs_temp_split[] = tem.split(",");
+                        Collections.addAll(temp, lhs_temp_split);
+			String temp2 = rig.get(i);
+			String rhs_temp_split[] = temp2.split(",");
+                        Collections.addAll(temp, rhs_temp_split);
+//			String temp2 = rhs.get(i);
+//			String rhs_temp_split[] = temp2.split(",");
+//			Set<String> rhs_split = new HashSet<String>();
+//			Collections.addAll(rhs_split, rhs_temp_split);
+                        
+                        System.out.println("GGGG");
+                        
+                        System.out.println(temp);
+                        System.out.println(RBA);
+                        
                         if(RBA.containsAll(temp))
                         {
+                            System.out.println("DDDD");
                             templef.add(lef.get(i));
                             temprig.add(rig.get(i));
                         }
                     }                    
                 }
                 lef = templef;
+                System.out.println("FFFFFFF");
+                    System.out.println(lef);
+                    System.out.println(RBA);
+                lhs = lef;
                 rig = temprig;
+                rhs = rig;
+                for(int i=0 ; i < lhs.size(); i++)
+                {
+                    maxnfindi[i] = 1;
+                }
+//                Set<String> deckey = new HashSet<String>();
+                keys.clear();
                 System.out.println("HI");
                 System.out.println(lef);
                 System.out.println(rig);
-        }       
-    }//GEN-LAST:event_decompose_buttonActionPerformed
+                
+                LinkedHashMap<String , Integer> gg = new LinkedHashMap<String , Integer>();
 
+                int pp = 0;
+
+                for( String s : RBA)
+                {
+                    gg.put(s , pp);   // Mapping the attributes
+                    pp++;
+                }
+
+
+                ArrayList<String> lhsss = new ArrayList();
+                ArrayList<String> rhsss = new ArrayList();
+
+                for( String ll : lef)
+                {
+                    String ll_split[] = ll.split(",");
+                    int ll_sp_size = ll_split.length;
+                    String tt = new String();
+                    tt="";
+                    for(int iii=0; iii<ll_sp_size; iii++)
+                    {
+                        tt+=gg.get(ll_split[iii]);
+                        if(iii != ll_sp_size-1)
+                        {
+                            tt+=",";
+                        }
+                    }
+                    lhsss.add(tt);
+                }
+
+                for( String ll : rig)
+                {
+                    String ll_split[] = ll.split(",");
+                    int ll_sp_size = ll_split.length;
+                    String tt = new String();
+                    tt="";
+                    for(int iii=0; iii<ll_sp_size; iii++)
+                    {
+                        tt+=gg.get(ll_split[iii]);
+                        if(iii != ll_sp_size-1)
+                        {
+                            tt+=",";
+                        }
+                    }
+                    rhsss.add(tt);
+                }
+                int keyyy = deckey(gg , RBA , pp , lhsss , rhsss);  
+                int iiiii=0;
+                while(keyyy!=0)
+                {
+                    if((keyyy&1)==1)
+                    {
+                        for(String rr : RBA)
+                        {
+                            if(gg.get(rr) == iiiii)
+                            {
+                                keys.add(rr);
+                            }
+                        }
+                    }
+                    iiiii++;
+                    keyyy/=2;
+                }
+            int ttt = 4;
+            for(int i=0;i<lhs.size();i++)              
+            {
+                ttt = min(ttt, maxnfindi[i]);
+            }
+            test = ttt;
+        }
+        if(RBA.size() == 0)
+        {
+            output_area.setText(out);
+            return ;
+        }
+                out += "Relation Number #";
+                out += Integer.toString(cur);
+                out += "\n";
+                cur ++;
+                out += "Attributes- ";
+                out += RBA;
+                out += "\n";
+                if(lhs.size() == 0)
+                {
+                    out += "No FDs\n";
+                }
+                else
+                {
+                    out += "FDs - ";
+                    out += "\n";
+                    for(int i=0;i<lhs.size();i++)
+                    {
+                        out += lhs.get(i);
+                        out += "->";
+                        out += rhs.get(i);
+                        out += "\n";
+                    }
+                    out += "Key - ";
+                    out += keys;
+                    out += "\n";
+                    out += "The relation is in ";
+                    if(test <= 3)
+                    {
+                        out += Integer.toString(test);
+                        out += "NF";
+                    }
+                    else
+                    {
+                        out += "BCNF";
+                    }
+                    out += "\n\n";
+                }
+        output_area.setText(out);
+    }//GEN-LAST:event_decompose_buttonActionPerformed
+    public static int deckey(LinkedHashMap<String , Integer> ggma , Set<String> attribute_set , int sizz , ArrayList<String> lhss , ArrayList<String> rhss)// ,Set<String> key)
+    {              
+        int x=1;
+        int ssss = lhss.size();
+        int maxx = sizz+1 , aa =-1 , maxnf =0;
+        for(int i=0;i<sizz;i++)
+        {
+            x*=2;
+        }
+                        for(int j=0;j<x;j++)
+                        {
+                            int arr[] = new int[sizz+5];
+                            int y=j , k=0 , mm=0;
+                            while(y!=0)
+                            {
+                                if((y&1)==1)
+                                {
+                                    arr[k]=1;
+                                    mm++;
+                                }
+                                k++;
+                                y/=2;
+                            }
+                            int fl=1;
+                            while(fl==1)
+                            {
+                                fl=0;
+                                int Ga=0;
+                                for(int i=0; i<ssss; i++)
+                                {
+                                    Ga = 0;
+                                    String temp = lhss.get(i);
+                                    for(int ii=0;ii<temp.length();ii+=2)
+                                    {
+                                        int xx=temp.charAt(ii)-'0';
+                                        if(arr[xx]==0)
+                                        {
+                                            Ga=1;
+                                            if(j == 6 && i == 2)
+                                            {
+                                                System.out.println("HI");
+                                                System.out.println(xx);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    if(j == 6 && i == 2)
+                                    {
+                                        System.out.println(arr[1]);
+                                        System.out.println(arr[0]);
+                                        System.out.println('B');
+                                        System.out.println(Ga);
+                                    }
+                                    if(Ga==0)
+                                    {
+                                        String ee = rhss.get(i);
+                                        for(int iii=0;iii<ee.length();iii+=2)
+                                        {
+                                            int xx=ee.charAt(iii)-'0';
+                                            System.out.print("a ");
+                                            System.out.println(iii);
+                                            if(arr[xx]==0)
+                                            {
+                                                arr[xx]=1;
+                                                fl=1;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            int Ga=0;
+                            for(int i=0;i<sizz;i++)
+                            {
+                                if(arr[i]==0)
+                                {
+                                    Ga=1;
+                                    break;
+                                }
+                            }
+                            if(Ga==0)// && mm<maxx)
+                            {
+                                System.out.println(j);
+    //                            maxx=mm;
+    //                            aa=j;
+                                int kee = j;
+                                Set<String> checkkey = new HashSet<String>();
+                    //            System.out.println(kee);/
+                                int iiiii=0;
+                                while(kee!=0)
+                                {
+                                    if((kee&1)==1)
+                                    {
+                                        for(String test : attribute_set)
+                                        {
+                                            if(ggma.get(test) == iiiii)
+                                            {
+                                                checkkey.add(test);
+                                            }
+                                        }
+                                    }
+                                    iiiii++;
+                                    kee/=2;
+                                }
+                                int temparr[] = new int[20];
+                                for(int i=0;i<ssss ;i++)
+                                {
+                                    temparr[i] = 1;
+                                }
+                                // Checker 
+                                twotwo(temparr, checkkey);
+                                int ma = 4;
+                                for(int i=0;i<ssss ; i++)
+                                {
+                                    if(temparr[i] < ma)
+                                    {
+                                        ma = temparr[i];
+                                    }
+                                }
+                                if(ma > maxnf)
+                                {
+                                    maxx = mm;
+                                    aa = j;
+                                    maxnf = ma;
+                                    for(int i=0;i<ssss ; i++)
+                                    {
+                                        maxnfindi[i] = temparr[i];
+                                    }
+                                }
+                                else if(ma == maxnf)
+                                {
+                                    if(mm<maxx)
+                                    {
+                                        maxx = mm;
+                                        aa = j;
+                                        for(int i=0;i<ssss ; i++)
+                                        {
+                                            maxnfindi[i] = temparr[i];
+                                        }
+                                    }
+                                }
+
+                            }
+                        } // Main loop ends here
+
+      // Assignmnet idhar karna hai
+
+
+        System.out.println(maxnf);
+        return aa;
+    }
+    public static void twotwo(int temparr[], Set<String> key)
+    {
+        for(int i=0; i<lhs.size(); i++) 
+		{
+            String temp = lhs.get(i);
+            String lhs_temp_split[] = temp.split(",");
+            Set<String> lhs_split = new HashSet<String>();
+            Collections.addAll(lhs_split, lhs_temp_split);
+            String temp2 = rhs.get(i);
+	    String rhs_temp_split[] = temp2.split(",");
+            Set<String> rhs_split = new HashSet<String>();
+            Collections.addAll(rhs_split, rhs_temp_split);
+            if(key.containsAll(lhs_split) == true && lhs_split.size() != key.size())
+            {
+		;
+            }
+            else
+            {
+                temparr[i] = 2;
+            }
+			if(lhs_split.containsAll(key) == true || key.containsAll(rhs_split) == true)
+			{
+			    if(temparr[i] == 2)
+				{
+                    temparr[i] = 3;
+                }
+			}
+			if(lhs_split.containsAll(key) == false)
+			{
+				;
+			}
+            else
+            {
+                temparr[i] = 4;
+            }
+        }
+    }
     private void clear_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_buttonActionPerformed
         fds.setText("");
         att_names.setText("");
