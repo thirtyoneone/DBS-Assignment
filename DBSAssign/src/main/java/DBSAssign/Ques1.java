@@ -18,11 +18,8 @@ public class Ques1 extends javax.swing.JFrame {
     static ArrayList<String> rhs = new ArrayList();
     Set<String> keys = new HashSet<String>();
     static int maxnfindi[] = new int[20];
-<<<<<<< HEAD
     static String output = "";
-=======
     static int lowestnormal = 4;
->>>>>>> bdc0965b682368abfecc1ce1f2b3d9bd839a1cb1
 
     /**
      * Creates new form Ques1
@@ -81,7 +78,6 @@ public class Ques1 extends javax.swing.JFrame {
                 decompose_buttonActionPerformed(evt);
             }
         });
-<<<<<<< HEAD
 
         clear_button.setText("Clear");
         clear_button.addActionListener(new java.awt.event.ActionListener() {
@@ -89,8 +85,6 @@ public class Ques1 extends javax.swing.JFrame {
                 clear_buttonActionPerformed(evt);
             }
         });
-=======
->>>>>>> bdc0965b682368abfecc1ce1f2b3d9bd839a1cb1
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,7 +280,6 @@ public class Ques1 extends javax.swing.JFrame {
 
     private void decompose_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decompose_buttonActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
     }//GEN-LAST:event_decompose_buttonActionPerformed
 
     private void clear_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_buttonActionPerformed
@@ -295,7 +288,6 @@ public class Ques1 extends javax.swing.JFrame {
         output = "";
         output_area.setText("");
     }//GEN-LAST:event_clear_buttonActionPerformed
-=======
         if(lowestnormal == 4)
         {
              output_area.setText("Already in BCNF");
@@ -365,8 +357,7 @@ public class Ques1 extends javax.swing.JFrame {
                 System.out.println(lef);
                 System.out.println(rig);
         }       
-    }//GEN-LAST:event_decompose_buttonActionPerformed
->>>>>>> bdc0965b682368abfecc1ce1f2b3d9bd839a1cb1
+    }                                                
 
     /**
      * @param args the command line arguments
