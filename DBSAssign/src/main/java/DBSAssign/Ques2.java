@@ -238,6 +238,8 @@ public class Ques2 extends javax.swing.JFrame {
         Arrays.fill(sizearray, 0);
         ldarray[0] = 1;
         ldarray[1] = 1;
+        output = "";
+        outputArea.setText(output);
         
         for(int i=0; i<10; i++)
         {
