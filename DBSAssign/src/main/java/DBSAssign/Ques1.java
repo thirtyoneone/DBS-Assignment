@@ -365,6 +365,22 @@ public class Ques1 extends javax.swing.JFrame {
         att_names.setText("");
         output = "";
         output_area.setText(output);
+//        static Set<String> attribute_set = new HashSet<String>();
+//        static ArrayList<String> lhs = new ArrayList();
+//        static ArrayList<String> rhs = new ArrayList();
+//        Set<String> keys = new HashSet<String>();
+//        static int maxnfindi[] = new int[20];
+//        static int lowestnormal = 4;
+//        String output = "";
+          attribute_set.clear();;
+          lhs.clear();
+          rhs.clear();
+          keys.clear();
+          lowestnormal = 4;
+          for(int i = 0 ; i < 19; i ++)
+          {
+              maxnfindi[i] = 0;
+          }
     }//GEN-LAST:event_clear_buttonActionPerformed
 
     /**
