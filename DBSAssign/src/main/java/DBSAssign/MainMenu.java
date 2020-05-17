@@ -102,8 +102,8 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        Ques2 q1 = new Ques2();
-        q1.setVisible(true);
+        Ques2 q2 = new Ques2();
+        q2.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
