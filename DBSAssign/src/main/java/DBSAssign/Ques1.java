@@ -21,7 +21,7 @@ public class Ques1 extends javax.swing.JFrame {
     static int maxnfindi[] = new int[20];
     static int lowestnormal = 4;
     String output = "";
-
+    static int ffflag = 0;
     /**
      * Creates new form Ques1
      */
@@ -165,6 +165,12 @@ public class Ques1 extends javax.swing.JFrame {
         Collections.addAll(attribute_set, att_temp_split);
         String fds_1 = fds.getText();
         System.out.println(fds_1);
+        if(attributes.equals("") == true)
+        {
+            String out = "No Attributes entered\n";
+            output_area.setText(out);
+            return ;
+        }
         if(fds_1.equals("") == true)
         {
             String out = "No FDs entered\n";
@@ -173,6 +179,7 @@ public class Ques1 extends javax.swing.JFrame {
             output_area.setText(out);
             return ;
         }
+        ffflag = 1;
         String fds_2[] = fds_1.split(";");
         int size = fds_2.length;
         for(int i=0; i<size; i++)
@@ -302,6 +309,12 @@ public class Ques1 extends javax.swing.JFrame {
 
     private void decompose_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decompose_buttonActionPerformed
         // TODO add your handling code here:
+        if(ffflag == 0)
+        {
+            String out = "Click solve button first\n";
+            output_area.setText(out);
+            return ;
+        }
         if(lowestnormal == 4)
         {
              output_area.setText("Already in BCNF");
