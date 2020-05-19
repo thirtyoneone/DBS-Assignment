@@ -2,6 +2,7 @@ package DBSAssign;
 
 import java.util.*;
 import java.lang.*;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +15,8 @@ import java.lang.*;
  * @author rushi
  */
 public class Ques2 extends javax.swing.JFrame {
-
+    
+    static int gd = 3;
     static int bfr = 3;
     static int[][] buckets = new int[100][200];
     static int[] ldarray = new int[100];
@@ -25,57 +27,67 @@ public class Ques2 extends javax.swing.JFrame {
     
     public static void add_key(int cur)
     {
-        System.out.println("In add key function");
     	int hash = cur%10;
     	String bi = Integer.toBinaryString(hash);
     	bi = String.format("%1$"+ 4+ "s", bi).replace(' ', '0');
         System.out.println(bi);
         for(int j=0; j<10; j++)
     	{
-			int ld = ldarray[j];
-			String keycomp, buckcomp;
-			if(ld != 0)
-			{
-				keycomp = bi.substring(bi.length()-ld, bi.length());
-				buckcomp = biarray[j].substring(biarray[j].length()-ld, biarray[j].length());
-                                 System.out.println(keycomp);
-                                 System.out.println(buckcomp);
-					if(keycomp.equals(buckcomp))
-					{
-						if(sizearray[j] < bfr)
-						{
-		    				buckets[j][sizearray[j]] = cur;
-		    				sizearray[j]++;
-                                                 System.out.println("Added successfully "+cur+" at pos "+j+", "+sizearray[j]);
-                                                 output += ("Adding "+cur+"\n");
-                                                        for(int i=0; i<10; i++)
-                                                        {
-                                                            System.out.println("checking bucket "+i+" size of this bucket = "+sizearray[i]);
-                                                            if(sizearray[i] > 0)
+            try{
+                            int ld = ldarray[j];
+                            String keycomp, buckcomp;
+                            if(ld != 0)
+                            {
+                                    keycomp = bi.substring(bi.length()-ld, bi.length());
+                                    buckcomp = biarray[j].substring(biarray[j].length()-ld, biarray[j].length());
+                                     System.out.println(keycomp);
+                                     System.out.println(buckcomp);
+                                            if(keycomp.equals(buckcomp))
+                                            {
+                                                    if(sizearray[j] < bfr)
+                                                    {
+                                                    buckets[j][sizearray[j]] = cur;
+                                                    sizearray[j]++;
+                                                     System.out.println("Added successfully "+cur+" at pos "+j+", "+sizearray[j]);
+                                                     if(Arrays.stream(ldarray).max().getAsInt() > gd)
+                                                     {
+                                                         gd++;
+                                                     }
+                                                     output += ("Adding "+cur+"\n");
+                                                            for(int i=0; i<10; i++)
                                                             {
-                                                                System.out.print("Bucket number "+i+" = ");
-                                                                output += ("Bucket number "+i+" = |");
-                                                                for(int k=0; k<sizearray[i]; k++)
+                                                                System.out.println("checking bucket "+i+" size of this bucket = "+sizearray[i]);
+                                                                if(sizearray[i] > 0)
                                                                 {
-                                                                        System.out.print(buckets[i][k]+" ");
-                                                                        output += (buckets[i][k]+" |");
-                                                                }
-                                                                System.out.println("");
-                                                                output += "\n";
+                                                                    System.out.print("Bucket number "+i+" = ");
+                                                                    output += ("Bucket number "+i+" = |");
+                                                                    for(int k=0; k<sizearray[i]; k++)
+                                                                    {
+                                                                            System.out.print(buckets[i][k]+" ");
+                                                                            output += (buckets[i][k]+" |");
+                                                                    }
+                                                                    System.out.println("");
+                                                                    output += "\n";
 
+                                                                }
                                                             }
-                                                        }
-                                                         output += "\n";
-                                                        //outputArea.setText(output);
-		    				break;
-						}
-						else
-						{
-							reset(cur, j);
-							break;
-						}
-					}
-			}
+                                                             output += "\n";
+                                                            //outputArea.setText(output);
+                                                    break;
+                                                    }
+                                                    else
+                                                    {
+                                                            reset(cur, j);
+                                                            break;
+                                                    }
+                                            }
+                            }
+            }
+            catch(Exception e)
+            {
+                output += "\n please choose a larger bfr and restart the hashing\n";
+                break;
+            }
 
     	}
     }
@@ -373,6 +385,7 @@ public class Ques2 extends javax.swing.JFrame {
         outputArea.setText("");
         keysInput.setText("");
         bfr_input.setText("");
+        findInput.setText("");
         
     }//GEN-LAST:event_clear_buttonActionPerformed
 
