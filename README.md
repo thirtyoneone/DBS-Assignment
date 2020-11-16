@@ -1,1 +1,1 @@
-### Project for CS F212
+We implemented a hashing function on java
